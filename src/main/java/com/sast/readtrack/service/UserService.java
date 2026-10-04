@@ -42,6 +42,7 @@ public class UserService {
         if (user.getPassword() == null || user.getPassword().isBlank()) {
             return Result.fail("密码不能为空");
         }
+        
         User found = userMapper.findByUsername(user.getUsername());
 
         if (found == null || !found.getPassword().equals(user.getPassword())) {
