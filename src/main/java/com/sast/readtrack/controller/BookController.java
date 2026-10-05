@@ -1,5 +1,6 @@
 package com.sast.readtrack.controller;
 
+import com.sast.readtrack.common.PageResult;
 import com.sast.readtrack.common.Result;
 import com.sast.readtrack.entity.Book;
 import com.sast.readtrack.service.BookService;
@@ -32,6 +33,12 @@ public class BookController {
     @DeleteMapping("/books/{id}")
     public Result<Void> delete(@PathVariable Integer id) {
         return bookService.delete(id);
+    }
+
+    @GetMapping("/books")
+    public Result<PageResult<Book>> list(@RequestParam(defaultValue = "1") Integer page,
+                                         @RequestParam(defaultValue = "10") Integer size) {
+        return bookService.list(page, size);
     }
 
 }

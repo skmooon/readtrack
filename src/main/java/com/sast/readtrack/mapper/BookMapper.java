@@ -31,5 +31,7 @@ public interface BookMapper {
                           @Param("offset") Integer offset,
                           @Param("size") Integer size);
 
+    @Select("SELECT COUNT(*) FROM books WHERE user_id = #{userId}")
+    int countByUserId(Integer userId);
 
 }

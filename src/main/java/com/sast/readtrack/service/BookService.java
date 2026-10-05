@@ -1,9 +1,12 @@
 package com.sast.readtrack.service;
 
+import com.sast.readtrack.common.PageResult;
 import com.sast.readtrack.common.Result;
 import com.sast.readtrack.entity.Book;
 import com.sast.readtrack.mapper.BookMapper;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class BookService {
@@ -92,6 +95,15 @@ public class BookService {
         bookMapper.deleteById(id);
         return Result.success();
     }
+
+    public Result<PageResult<Book>> list(Integer page, Integer size) {
+        int offset = (page - 1) * size;
+        int total = bookMapper.countByUserId(CURRENT_USER_ID);
+        List<Book> list = bookMapper.findByPage(CURRENT_USER_ID, offset, size);
+        PageResult<Book> result = new PageResult<>(list, total, page, size);
+        return Result.success(result);
+    }
+
 }
 
 
