@@ -3,11 +3,7 @@ package com.sast.readtrack.controller;
 import com.sast.readtrack.common.Result;
 import com.sast.readtrack.entity.Book;
 import com.sast.readtrack.service.BookService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class BookController {
@@ -27,4 +23,15 @@ public class BookController {
     public Result<Book> detail(@PathVariable Integer id) {
         return bookService.detail(id);
     }
+
+    @PutMapping("/books/{id}/progress")
+    public Result<Void> updateProgress(@PathVariable Integer id, @RequestBody Book book) {
+        return bookService.updateProgress(id, book);
+    }
+
+    @DeleteMapping("/books/{id}")
+    public Result<Void> delete(@PathVariable Integer id) {
+        return bookService.delete(id);
+    }
+
 }
