@@ -4,6 +4,10 @@ import com.sast.readtrack.common.Result;
 import com.sast.readtrack.entity.User;
 import com.sast.readtrack.mapper.UserMapper;
 import org.springframework.stereotype.Service;
+import com.sast.readtrack.dto.UserVO;
+
+import java.util.ArrayList;
+
 
 import java.util.List;
 
@@ -16,9 +20,19 @@ public class UserService {
         this.userMapper = userMapper;
     }
 
-    public List<User> listUsers() {
-        return userMapper.findAll();
+    public List<UserVO> listUsers() {
+        List<User> users = userMapper.findAll();
+        List<UserVO> result = new ArrayList<>();
+        for (User user : users) {
+            UserVO vo = new UserVO();
+            vo.setId(user.getId());
+            vo.setUsername(user.getUsername());
+            vo.setCreatedAt(user.getCreatedAt());
+            result.add(vo);
+        }
+        return result;
     }
+
 
     public Result<Void> register(User user) {
         if (user.getUsername() == null || user.getUsername().isBlank()) {
@@ -42,7 +56,7 @@ public class UserService {
         if (user.getPassword() == null || user.getPassword().isBlank()) {
             return Result.fail("密码不能为空");
         }
-        
+
         User found = userMapper.findByUsername(user.getUsername());
 
         if (found == null || !found.getPassword().equals(user.getPassword())) {

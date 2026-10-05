@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import com.sast.readtrack.dto.UserVO;
+
 
 import java.util.List;
 
@@ -20,7 +22,7 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public List<User> list() {
+    public List<UserVO> list() {
         return userService.listUsers();
     }
 
@@ -33,5 +35,6 @@ public class UserController {
     public Result<Void> login(@RequestBody User user) {
         return userService.login(user);
     }
+
 
 }
