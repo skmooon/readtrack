@@ -97,12 +97,21 @@ public class BookService {
     }
 
     public Result<PageResult<Book>> list(Integer page, Integer size) {
+
+        if (page == null || page < 1) {
+            return Result.fail("页码必须大于0");
+        }
+        if (size == null || size < 1 || size > 100) {
+            return Result.fail("每页条数必须在1到100之间");
+        }
+
         int offset = (page - 1) * size;
         int total = bookMapper.countByUserId(CURRENT_USER_ID);
         List<Book> list = bookMapper.findByPage(CURRENT_USER_ID, offset, size);
         PageResult<Book> result = new PageResult<>(list, total, page, size);
         return Result.success(result);
     }
+
 
 }
 

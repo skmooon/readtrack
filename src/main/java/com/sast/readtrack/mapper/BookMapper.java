@@ -26,7 +26,7 @@ public interface BookMapper {
     @Delete("DELETE FROM books WHERE id = #{id}")
     void deleteById(Integer id);
 
-    @Select("SELECT * FROM books WHERE user_id = #{userId} ORDER BY created_at DESC LIMIT #{offset}, #{size}")
+    @Select("SELECT * FROM books WHERE user_id = #{userId} ORDER BY created_at DESC, id DESC LIMIT #{offset}, #{size}")
     List<Book> findByPage(@Param("userId") Integer userId,
                           @Param("offset") Integer offset,
                           @Param("size") Integer size);
