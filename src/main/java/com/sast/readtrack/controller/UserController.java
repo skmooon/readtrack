@@ -35,6 +35,4 @@ public class UserController {
     public Result<Void> login(@RequestBody User user) {
         return userService.login(user);
     }
-
-
 }

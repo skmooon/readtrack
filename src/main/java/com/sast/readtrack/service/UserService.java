@@ -32,8 +32,7 @@ public class UserService {
         }
         return result;
     }
-
-
+    
     public Result<Void> register(User user) {
         if (user.getUsername() == null || user.getUsername().isBlank()) {
             return Result.fail("用户名不能为空");
