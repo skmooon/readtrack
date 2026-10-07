@@ -8,8 +8,15 @@ public class PageResult<T> {
     private Integer total;
     private Integer page;
     private Integer size;
-
+    
     public PageResult() {
+    }
+
+    public PageResult(List<T> list, Integer total, Integer page, Integer size) {
+        this.list = list;
+        this.total = total;
+        this.page = page;
+        this.size = size;
     }
 
     public List<T> getList() {
@@ -44,10 +51,4 @@ public class PageResult<T> {
         this.size = size;
     }
 
-    public PageResult(List<T> list, Integer total, Integer page, Integer size) {
-        this.list = list;
-        this.total = total;
-        this.page = page;
-        this.size = size;
-    }
 }
